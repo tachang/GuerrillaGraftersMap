@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SFggrfters</title>
+	
+	<link rel="stylesheet" href="http://openlayers.org/dev/theme/default/style.css" type="text/css"> 
+    <link rel="stylesheet" href="http://openlayers.org/dev/examples/style.css" type="text/css"> 
+	<!-- <style type="text/css">
+		.bigmap {
+		    width: 1024px;
+		    height: 768px;
+		    border: 1px solid #ccc;
+		}	
+	</style> -->
+    <style type="text/css"> 
+        #controlToggle li {
+            list-style: none;
+        }
+    </style>    
+	<script src="http://openlayers.org/dev/OpenLayers.js"></script>
+    <script src="http://openlayers.org/dev/lib/Firebug/firebug.js"></script> 
+
+	<script type="text/javascript" src="http://openlayers.org/api/2.8/OpenLayers.js"></script> 
+	<script type="text/javascript" src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+	<style type="text/css"> 
+	  #id_geom_map { width: 1024px; height: 768px; }
+	  #id_geom_map .aligned label { float:inherit; }
+	  #id_geom_admin_map { position: relative; vertical-align: top; float: left; }
+	  #id_geom { display: none; }
+	  #id_geom2 { display: none; }
+	  .olControlEditingToolbar .olControlModifyFeatureItemActive { 
+	     background-image: url("/media/img/gis/move_vertex_on.png");
+	     background-repeat: no-repeat;
+	  }
+	  .olControlEditingToolbar .olControlModifyFeatureItemInactive { 
+	     background-image: url("/media/img/gis/move_vertex_off.png");
+	     background-repeat: no-repeat;
+	  }
+	</style>
+
+</head>
+<body>
+	
+	<span id="id_geom_admin_map"> 
+	<script type="text/javascript"> 
+	//<![CDATA[
+
+	var geodjango_geom = {};
+	geodjango_geom.map = null; geodjango_geom.controls = null; geodjango_geom.panel = null; geodjango_geom.re = new RegExp("^SRID=\d+;(.+)", "i"); geodjango_geom.layers = {};
+	geodjango_geom.modifiable = true;
+	geodjango_geom.wkt_f = new OpenLayers.Format.WKT();
+	geodjango_geom.is_collection = true;
+	geodjango_geom.collection_type = 'Polygon';
+	geodjango_geom.is_linestring = false;
+	geodjango_geom.is_polygon = true;
+	geodjango_geom.is_point = false;
+
+//SRID=4326
+//SRID=900913
+	geodjango_geom.get_ewkt = function(feat){return 'SRID=4326;' + geodjango_geom.wkt_f.write(feat);}
+	geodjango_geom.read_wkt = function(wkt){
+	  // OpenLayers cannot handle EWKT -- we make sure to strip it out.
+	  // EWKT is only exposed to OL if there's a validation error in the admin.
+	  var match = geodjango_geom.re.exec(wkt);
+	  if (match){wkt = match[1];}
+	  return geodjango_geom.wkt_f.read(wkt);
+	}
+	geodjango_geom.write_wkt = function(feat, div_id){
+	  if (geodjango_geom.is_collection){ geodjango_geom.num_geom = feat.geometry.components.length;}
+	  else { geodjango_geom.num_geom = 1;}
+	  document.getElementById(div_id).value = geodjango_geom.get_ewkt(feat);
+	}
+	geodjango_geom.add_wkt = function(event){
+	  // This function will sync the contents of the `vector` layer with the
+	  // WKT in the text field.
+	  if (geodjango_geom.is_collection){
+	    var feat = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.MultiPolygon());
+	    for (var i = 0; i < geodjango_geom.layers.vector.features.length; i++){
+	      feat.geometry.addComponents([geodjango_geom.layers.vector.features[i].geometry]);
+	    }
+	    geodjango_geom.write_wkt(feat);
+	  } else {
+	    // Make sure to remove any previously added features.
+	    if (geodjango_geom.layers.vector.features.length > 1){
+	      old_feats = [geodjango_geom.layers.vector.features[0]];
+	      geodjango_geom.layers.vector.removeFeatures(old_feats);
+	      geodjango_geom.layers.vector.destroyFeatures(old_feats);
+	    }
+	    geodjango_geom.write_wkt(event.feature);
+	  }
+	}
+	geodjango_geom.modify_wkt = function(event){
+	  if (geodjango_geom.is_collection){
+	    if (geodjango_geom.is_point){
+	      geodjango_geom.add_wkt(event);
+	      return;
+	    } else {
+	      // When modifying the selected components are added to the
+	      // vector layer so we only increment to the `num_geom` value.
+	      var feat = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.MultiPolygon());
+	      for (var i = 0; i < geodjango_geom.num_geom; i++){
+		feat.geometry.addComponents([geodjango_geom.layers.vector.features[i].geometry]);
+	      }
+	      geodjango_geom.write_wkt(feat);
+	    }
+	  } else {
+	    geodjango_geom.write_wkt(event.feature);
+	  }
+	}
+	// Function to clear vector features and purge wkt from div
+	geodjango_geom.deleteFeatures = function(){
+	  geodjango_geom.layers.vector.removeFeatures(geodjango_geom.layers.vector.features);
+	  geodjango_geom.layers.vector.destroyFeatures();
+	}
+	geodjango_geom.clearFeatures = function (){
+	  geodjango_geom.deleteFeatures();
+	  document.getElementById('id_geom').value = '';
+	  geodjango_geom.map.setCenter(new OpenLayers.LonLat(0, 0), 4);
+	}
+	// Add Select control
+	geodjango_geom.addSelectControl = function(){
+	  var select = new OpenLayers.Control.SelectFeature(geodjango_geom.layers.vector, {'toggle' : true, 'clickout' : true});
+	  geodjango_geom.map.addControl(select);
+	  select.activate();
+	}
+	geodjango_geom.enableDrawing = function(){ geodjango_geom.map.getControlsByClass('OpenLayers.Control.DrawFeature')[0].activate();}
+	geodjango_geom.enableEditing = function(){ geodjango_geom.map.getControlsByClass('OpenLayers.Control.ModifyFeature')[0].activate();}
+	// Create an array of controls based on geometry type
+	geodjango_geom.getControls = function(lyr){
+	  geodjango_geom.panel = new OpenLayers.Control.Panel({'displayClass': 'olControlEditingToolbar'});
+	  var nav = new OpenLayers.Control.Navigation();
+	  var draw_ctl;
+	  if (geodjango_geom.is_linestring){
+	    draw_ctl = new OpenLayers.Control.DrawFeature(lyr, OpenLayers.Handler.Path, {'displayClass': 'olControlDrawFeaturePath'});
+	  } else if (geodjango_geom.is_polygon){
+	    draw_ctl = new OpenLayers.Control.DrawFeature(lyr, OpenLayers.Handler.Polygon, {'displayClass': 'olControlDrawFeaturePolygon'});
+	  } else if (geodjango_geom.is_point){
+	    draw_ctl = new OpenLayers.Control.DrawFeature(lyr, OpenLayers.Handler.Point, {'displayClass': 'olControlDrawFeaturePoint'});
+	  }
+	  if (geodjango_geom.modifiable){
+	    var mod = new OpenLayers.Control.ModifyFeature(lyr, {'displayClass': 'olControlModifyFeature'});
+	    geodjango_geom.controls = [nav, draw_ctl, mod];
+	  } else {
+	    if(!lyr.features.length){
+	      geodjango_geom.controls = [nav, draw_ctl];
+	    } else {
+	      geodjango_geom.controls = [nav];
+	    }
+	  }
+	}
+	geodjango_geom.init = function(){
+	    // The options hash, w/ zoom, resolution, and projection settings.
+	    var options = {
+	      'units' : "m",
+	      'maxResolution' : 156543.0339,
+	      'numZoomLevels' : 20,
+	      'projection' : new OpenLayers.Projection("EPSG:900913"),
+	      'maxExtent' : new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508)
+	    };
+	    // The admin map for this geometry field.
+	    geodjango_geom.map = new OpenLayers.Map('id_geom_map', options);
+	    // Base Layer
+	    geodjango_geom.layers.base = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap (Mapnik)");
+	    geodjango_geom.map.addLayer(geodjango_geom.layers.base);
+
+
+	    geodjango_geom.layers.vector = new OpenLayers.Layer.Vector(" geom");
+	    geodjango_geom.map.addLayer(geodjango_geom.layers.vector);
+	    // Read WKT from the text field.
+	    var wkt = document.getElementById('id_geom').value;
+	    var wkt2 = document.getElementById('id_geom2').value; 
+	    if (wkt2){
+		
+	      // After reading into geometry, immediately write back to
+	      // WKT <textarea> as EWKT (so that SRID is included).
+	      var admin_geom = geodjango_geom.read_wkt(wkt);
+	      geodjango_geom.write_wkt(admin_geom, 'id_geom');
+	
+	      var admin_geom2 = geodjango_geom.read_wkt(wkt2);
+	      geodjango_geom.write_wkt(admin_geom2, 'id_geom2');
+	
+		// 	      if (geodjango_geom.is_collection){
+		// 
+		// // If geometry collection, add each component individually so they may be
+		// // edited individually.
+		// for (var i = 0; i < geodjango_geom.num_geom; i++){
+		//   geodjango_geom.layers.vector.addFeatures([new OpenLayers.Feature.Vector(admin_geom.geometry.components[i].clone())]);
+		// }
+		// 	      } else {
+		// geodjango_geom.layers.vector.addFeatures([admin_geom, admin_geom2]);
+		// 	      }
+	
+		geodjango_geom.layers.vector.addFeatures([admin_geom, admin_geom2]);
+	
+	      // Zooming to the bounds.
+	      geodjango_geom.map.zoomToExtent(admin_geom.geometry.getBounds());
+	      if (geodjango_geom.is_point){
+	          geodjango_geom.map.zoomTo(14);
+	      }
+	    } else {
+	      geodjango_geom.map.setCenter(new OpenLayers.LonLat(0, 0), 4);
+	    }
+	    // This allows editing of the geographic fields -- the modified WKT is
+	    // written back to the content field (as EWKT, so that the ORM will know
+	    // to transform back to original SRID).
+	    geodjango_geom.layers.vector.events.on({"featuremodified" : geodjango_geom.modify_wkt});
+	    geodjango_geom.layers.vector.events.on({"featureadded" : geodjango_geom.add_wkt});
+
+	    // Map controls:
+	    // Add geometry specific panel of toolbar controls
+	    geodjango_geom.getControls(geodjango_geom.layers.vector);
+	    geodjango_geom.panel.addControls(geodjango_geom.controls);
+	    geodjango_geom.map.addControl(geodjango_geom.panel);
+	    geodjango_geom.addSelectControl();
+	    // Then add optional visual controls
+	    geodjango_geom.map.addControl(new OpenLayers.Control.MousePosition());
+	    geodjango_geom.map.addControl(new OpenLayers.Control.Scale());
+	    geodjango_geom.map.addControl(new OpenLayers.Control.LayerSwitcher());
+	    // Then add optional behavior controls
+
+
+	    if (wkt){
+	      if (geodjango_geom.modifiable){
+	        geodjango_geom.enableEditing();
+	      }
+	    } else {
+	      geodjango_geom.enableDrawing();
+	    }
+	}
+
+	//]]>
+	</script>	
+	<div id="id_geom_map"></div> 
+
+	<textarea id="id_geom" class="vWKTField required" cols="150" rows="10" name="geom">MULTIPOLYGON (((-13629509.161361603066325 4546849.864982801489532,-13629607.852904967963696 4546841.974583419971168,-13629662.893870079889894 4546856.536413196474314,-13629779.821435069665313 4546838.398572540841997,-13629817.447557648643851 4546766.938686392270029,-13629964.181981874629855 4546677.502167878672481,-13630031.937755085527897 4546550.445259436033666,-13630154.731330508366227 4546437.948108281008899,-13630177.369539448991418 4546398.212684444151819,-13630263.674655813723803 4546412.119052530266345,-13630332.561417756602168 4546340.008267845958471,-13630417.242238601669669 4546275.420619863085449,-13630400.960068628191948 4546244.349862021394074,-13630415.455871703103185 4546189.079336622729897,-13630438.90464174002409 4546188.590071086771786,-13630467.408264650031924 4546054.502564493566751,-13630559.089541062712669 4545950.507316609844565,-13630605.010787107050419 4545902.434234725311399,-13630659.723020857200027 4545901.291564889252186,-13630681.870406541973352 4545838.010319252498448,-13630713.134354151785374 4545837.357172527350485,-13630671.778270084410906 4545728.289438051171601,-13630675.135621378198266 4545722.996890829876065,-13630717.210153963416815 4545656.670540232211351,-13630731.703472161665559 4545601.402655383571982,-13630761.665539603680372 4545537.95970431342721,-13630791.95258174277842 4545490.21434561163187,-13630877.111882321536541 4545449.173961007036269,-13631040.752841457724571 4545422.195112640038133,-13631231.476890817284584 4545399.001472203992307,-13631281.907219141721725 4545739.083251760341227,-13631398.684693060815334 4546466.920089863240719,-13631407.540427917614579 4546474.442733002826571,-13631406.664303692057729 4546474.605624482035637,-13631593.881054095923901 4547646.564895800314844,-13631587.648472866043448 4547656.648671789094806,-13630677.204274384304881 4547802.861281266435981,-13630013.081770624965429 4547909.464234125800431,-13629763.72986645437777 4547953.923325336538255,-13629656.485007403418422 4547304.302875496447086,-13629611.897975517436862 4547038.218210035003722,-13629579.821461401879787 4546999.619087601080537,-13629523.647710191085935 4546930.108287608250976,-13629509.161361603066325 4546849.864982801489532)))</textarea> 
+	<textarea id="id_geom2" class="vWKTField required" cols="150" rows="10" name="id_geom2">MULTIPOLYGON (((-13630675.1356213781982660 4545722.9968908298760653, -13630671.7782700844109058 4545728.2894380511716008, -13630713.1343541517853737 4545837.3571725273504853, -13630681.8704065419733524 4545838.0103192524984479, -13630659.7230208572000265 4545901.2915648892521858, -13630605.0107871070504189 4545902.4342347253113985, -13630559.0895410627126694 4545950.5073166098445654, -13630467.4082646500319242 4546054.5025644935667515, -13630438.9046417400240898 4546188.5900710867717862, -13630415.4558717031031847 4546189.0793366227298975, -13630400.9600686281919479 4546244.3498620213940740, -13630417.2422386016696692 4546275.4206198630854487, -13630332.5614177566021681 4546340.0082678459584713, -13630263.6746558137238026 4546412.1190525302663445, -13630177.3695394489914179 4546398.2126844441518188, -13630154.7313305083662271 4546437.9481082810088992, -13630031.9377550855278969 4546550.4452594360336661, -13629964.1819818746298552 4546677.5021678786724806, -13629817.4475576486438513 4546766.9386863922700286, -13629779.8214350696653128 4546838.3985725408419967, -13629662.8938700798898935 4546856.5364131964743137, -13629607.8529049679636955 4546841.9745834199711680, -13629509.1613616030663252 4546849.8649828014895320, -13629076.9586870893836021 4546884.4084970159456134, -13628484.6688692364841700 4546925.7281781267374754, -13628352.9941698051989079 4545100.7429798757657409, -13629108.6391155142337084 4545052.0636605462059379, -13629713.6766210682690144 4545000.9769414663314819, -13629712.4061206914484501 4544939.3689378052949905, -13629835.1048510801047087 4544936.8165214732289314, -13629845.7927857358008623 4545082.9764607371762395, -13630014.1877010799944401 4545064.0621703155338764, -13630074.7265322338789701 4545046.1196060292422771, -13630137.6834528800100088 4545100.0115312421694398, -13630199.1928761154413223 4545106.4340419918298721, -13630246.3200246002525091 4545159.3826750805601478, -13630301.9127926602959633 4545250.6773328194394708, -13630356.7100477311760187 4545303.4662401489913464, -13630426.6864545382559299 4545348.2338526695966721, -13630464.7125152815133333 4545332.0312025761231780, -13630503.2166521623730659 4545338.9321548445150256, -13630635.1837751902639866 4545413.2229505544528365, -13630681.3573416471481323 4545419.9631448313593864, -13630660.7430503591895103 4545535.9640746200457215, -13630671.2836274709552526 4545674.4299779282882810, -13630672.2408039048314095 4545720.6390905352309346, -13630675.1356213781982660 4545722.9968908298760653)))</textarea>
+	
+	
+	
+	<script type="text/javascript">geodjango_geom.init();</script> 
+	</span>	
+	
+</body>
+</html>
