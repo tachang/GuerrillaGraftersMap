@@ -8,10 +8,10 @@
     
     Alias /robots.txt /home/newsapps/sites/hello_newsroom/repository/hello_newsroom/assets/robots.txt
  
-    ErrorLog /home/newsapps/logs/hello_newsroom.error.log
+    ErrorLog /home/newsapps/logs/guerillagrafters/error.log
     LogLevel warn
 
-    CustomLog /home/newsapps/logs/hello_newsroom.access.log combined
+    CustomLog /home/newsapps/logs/guerillagrafters/access.log combined
     
     ServerSignature Off
     
