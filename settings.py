@@ -1,4 +1,5 @@
 import os
+import django
 
 # Django settings for GiraffeGraftersMap project.
 
@@ -84,7 +85,7 @@ TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
-ROOT_URLCONF = 'guerillagrafters.urls'
+ROOT_URLCONF = 'urls'
 
 # Base paths
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
