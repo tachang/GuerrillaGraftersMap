@@ -18,7 +18,7 @@ env.apache_config_path = '/home/newsapps/sites/apache/%(project_name)s' % env
 env.python = 'python2.6'
 env.repository_url = 'git://github.com/boundsj/GuerrillaGraftersMap.git'
 # TODO: enable server caching
-# env.multi_server = False
+env.multi_server = False
 # env.memcached_server_address = "cache.example.com"
 
 """
@@ -37,7 +37,7 @@ def staging():
 	# "newsapps" user is due to the fact that our EC2 (Amazon web serivce) server was set up from 
 	# the chicago tribune open source, ec2, geodjango project's ec2 build image
     env.user = 'newsapps' 
-    env.hosts = ['ec2-184-72-215-184.compute-1.amazonaws.com'] 
+    env.hosts = ['ec2-184-73-123-132.compute-1.amazonaws.com'] 
     # Install your SSH public key in the 'authorized_keys' file for the above user on the above host,
     # or specify the path to your private key in env.key_filename below.
     # see http://www.eng.cam.ac.uk/help/jpmg/ssh/authorized_keys_howto.html for more info.
@@ -69,17 +69,17 @@ def setup():
     Does NOT perform the functions of deploy().
     """
     require('settings', provided_by=[production, staging])
-    require('branch', provided_by=[stable, master, branch])
+    require('branch', provided_by=[master, branch])
 
     setup_directories()
     setup_virtualenv()
     clone_repo()
     checkout_latest()
-    destroy_database()
-    create_database()
-    load_data()
+    # destroy_database()
+    # create_database()
+    # load_data()
     install_requirements()
-    install_apache_conf()
+    maintenance_down()
 
 def setup_directories():
     """
@@ -109,6 +109,44 @@ def checkout_latest():
     Pull the latest code on the specified branch.
     """
     run('cd %(repo_path)s; git checkout %(branch)s; git pull origin %(branch)s' % env)
+
+def install_requirements():
+    """
+    Install the required packages using pip.
+    """
+    run('source %(env_path)s/bin/activate; pip install -E %(env_path)s -r %(repo_path)s/requirements.txt' % env)
+
+def install_apache_conf():
+    """
+    Install the apache site config file.
+    """
+    sudo('cp %(repo_path)s/configs/%(settings)s/apache %(apache_config_path)s' % env)
+
+def maintenance_up():
+    """
+    Install the Apache maintenance configuration.
+    """
+    sudo('cp %(repo_path)s/%(project_name)s/configs/%(settings)s/apache_maintenance %(apache_config_path)s' % env)
+    reboot()
+
+def maintenance_down():
+    """
+    Reinstall the normal site configuration.
+    """
+    install_apache_conf()
+    reboot()
+
+"""
+Commands - deployment
+"""
+def reboot(): 
+    """
+    Restart the Apache2 server.
+    """
+    if env.multi_server:
+        run('/mnt/apps/bin/restart-all-apache.sh')
+    else:
+        sudo('service apache2 restart')
 
 """
 Commands - data
@@ -150,3 +188,21 @@ def destroy_database(func=run):
     with settings(warn_only=True):
         func('dropdb %(project_name)s' % env)
         func('dropuser %(project_name)s' % env)
+
+"""
+Deaths, destroyers of worlds
+"""
+def shiva_the_destroyer():
+    """
+    Remove all directories, databases, etc. associated with the application.
+    """
+    with settings(warn_only=True):
+        run('rm -Rf %(path)s' % env)
+        run('rm -Rf %(log_path)s' % env)
+        # pgpool_down()
+        # run('dropdb %(project_name)s' % env)
+        # run('dropuser %(project_name)s' % env)
+        # pgpool_up()
+        sudo('rm %(apache_config_path)s' % env)
+        reboot()
+        # run('s3cmd del --recursive s3://%(s3_bucket)s/%(project_name)s' % env)
