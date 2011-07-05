@@ -86,6 +86,12 @@ TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
+# Base paths
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+# Predefined domain
+MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
