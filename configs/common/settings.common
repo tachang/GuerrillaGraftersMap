@@ -20,8 +20,8 @@ DATABASES = {
     }
 }
 
-#GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-#GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
+GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
