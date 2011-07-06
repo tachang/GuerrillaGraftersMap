@@ -13,15 +13,21 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'ggdb',
-        'USER': 'postgres',                     
-    }
 }
 
-#GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-#GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+# Base paths
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+# Predefined domain
+MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
+
+GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
+GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+
+# Database
+DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
+DATABASE_NAME = 'ggdb'
+DATABASE_USER = 'postgres'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -86,12 +92,6 @@ TEMPLATE_DIRS = (
 )
 
 ROOT_URLCONF = 'urls'
-
-# Base paths
-DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
-SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-# Predefined domain
-MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
 
 INSTALLED_APPS = (
     'django.contrib.auth',

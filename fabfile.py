@@ -75,11 +75,24 @@ def setup():
     setup_virtualenv()
     clone_repo()
     checkout_latest()
-    # destroy_database()
-    # create_database()
-    # load_data()
+    destroy_database()
+    create_database()
+    load_data()
     install_requirements()
     maintenance_down()
+
+def setup_database_only():
+    """
+    Setup a fresh virtualenv, install everything we need, and fire up the database.
+
+    Does NOT perform the functions of deploy().
+    """
+    require('settings', provided_by=[production, staging])
+    require('branch', provided_by=[master, branch])
+
+    destroy_database()
+    create_database()
+    load_data()
 
 def setup_directories():
     """
@@ -169,8 +182,8 @@ def load_data():
     """
     Loads data from the repository into PostgreSQL.
     """
-    run('psql -q %(project_name)s < %(path)s/repository/data/psql/dump.sql' % env)
-    run('psql -q %(project_name)s < %(path)s/repository/data/psql/finish_init.sql' % env)
+    run('psql -q %(project_name)s < %(path)s/repository/sanfran/data/database/dump.sql' % env)
+    run('psql -q %(project_name)s < %(path)s/repository/sanfran/data/database/finish_init.sql' % env)
 
 def create_database(func=run):
     """
