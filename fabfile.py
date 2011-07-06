@@ -81,19 +81,6 @@ def setup():
     install_requirements()
     maintenance_down()
 
-def setup_database_only():
-    """
-    Setup a fresh virtualenv, install everything we need, and fire up the database.
-
-    Does NOT perform the functions of deploy().
-    """
-    require('settings', provided_by=[production, staging])
-    require('branch', provided_by=[master, branch])
-
-    destroy_database()
-    create_database()
-    load_data()
-
 def setup_directories():
     """
     Create directories necessary for deployment.
@@ -152,6 +139,30 @@ def maintenance_down():
 """
 Commands - deployment
 """
+"""
+Commands - deployment
+"""
+def deploy():
+    """
+    Deploy the latest version of the site to the server and restart Apache2.
+    
+    Does not perform the functions of load_new_data().
+    """
+    require('settings', provided_by=[production, staging])
+    require('branch', provided_by=[stable, master, branch])
+            
+    checkout_latest()
+    gzip_assets()
+    #deploy_to_s3()
+    #maintenance_down()
+
+def gzip_assets():
+    """
+    GZips every file in the assets directory and places the new file
+    in the gzip directory with the same filename.
+    """
+    run('cd %(repo_path)s; python gzip_assets.py' % env)
+
 def reboot(): 
     """
     Restart the Apache2 server.
@@ -201,6 +212,18 @@ def destroy_database(func=run):
     with settings(warn_only=True):
         func('dropdb %(project_name)s' % env)
         func('dropuser %(project_name)s' % env)
+
+def pgpool_down():
+    """
+    Stop pgpool so that it won't prevent the database from being rebuilt.
+    """
+    sudo('/etc/init.d/pgpool stop')
+
+def pgpool_up():
+    """
+    Start pgpool.
+    """
+    sudo('/etc/init.d/pgpool start')
 
 """
 Deaths, destroyers of worlds
