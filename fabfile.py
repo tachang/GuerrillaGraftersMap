@@ -167,7 +167,7 @@ def deploy_to_s3():
     """
     Deploy the latest project site media to S3.
     """
-    env.gzip_path = '%(path)s/repository/%(project_name)s/sanfran/gzip/assets/' % env
+    env.gzip_path = '%(path)s/repository/sanfran/gzip/assets/' % env
     run(('s3cmd -P --add-header=Content-encoding:gzip --guess-mime-type --rexclude-from=%(path)s/repository/s3exclude sync %(gzip_path)s s3://%(s3_bucket)s/%(project_name)s/%(admin_media_prefix)s/') % env)
 
 def reboot(): 
