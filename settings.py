@@ -18,18 +18,25 @@ SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__f
 # Predefined domain
 MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/admin_media/media/'
+# # Absolute path to the directory that holds media.
+# # Example: "/home/media/media.lawrence.com/"
+# MEDIA_ROOT = ''
+# 
+# # URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# # trailing slash if there is a path component (optional in other cases).
+# # Examples: "http://media.lawrence.com", "http://example.com/media/"
+# MEDIA_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
+# 
+# # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
+# # trailing slash.
+# # Examples: "http://foo.com/media/", "/media/".
+# ADMIN_MEDIA_PREFIX = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/admin_media/media/'
 
 #GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
 #GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+
+STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
 
 # Database
 # DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
@@ -64,20 +71,6 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
 USE_L10N = True
-
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '6f@dyoq0&1ehftrrhl2p%vi!d)t@l3rp9yiso7u8m6g3(z1dqt'
@@ -114,7 +107,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
 	'django.contrib.gis',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+	'staticfiles',
 	'sanfran',
+	# Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
 )
