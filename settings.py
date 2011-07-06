@@ -17,37 +17,25 @@ DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 # Predefined domain
 MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
-
-# # Absolute path to the directory that holds media.
-# # Example: "/home/media/media.lawrence.com/"
-# MEDIA_ROOT = ''
-# 
-# # URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# # trailing slash if there is a path component (optional in other cases).
-# # Examples: "http://media.lawrence.com", "http://example.com/media/"
-# MEDIA_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
-# 
-# # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# # trailing slash.
-# # Examples: "http://foo.com/media/", "/media/".
-# ADMIN_MEDIA_PREFIX = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/admin_media/media/'
-
-#GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-#GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
-
+# Static file hosting paths
 STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
 
-# Database
+# Database (uncomment for staging)
 # DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-# DATABASE_NAME = 'ggdb'
-# DATABASE_USER = 'postgres'
+# DATABASE_NAME = 'guerillagrafters'
+# DATABASE_USER = 'guerillagrafters'
+# DATABASE_HOST = 'localhost'
+# DATABASE_PASSWORD = '5IQZe7WEix'
+# DATABASE_PORT = '5432'
+
+# temporary local development options (comment for staging)
 DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-DATABASE_NAME = 'guerillagrafters'
-DATABASE_USER = 'guerillagrafters'
-DATABASE_HOST = 'localhost'
-DATABASE_PASSWORD = '5IQZe7WEix'
-DATABASE_PORT = '5432'
+DATABASE_NAME = 'ggdb'
+DATABASE_USER = 'postgres'
+GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
+GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+STATIC_ROOT = ''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
