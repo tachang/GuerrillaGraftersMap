@@ -1,6 +1,10 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Boring Stuff' %}{% endblock %}
 
 {% block branding %}
 <h1 id="site-name">{% trans 'Guerilla Grafters Administration and Such' %}</h1>
 {% endblock %}
 
+{% block nav-global %}{% endblock %}
