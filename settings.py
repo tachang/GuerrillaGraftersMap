@@ -26,7 +26,7 @@ MEDIA_URL = 'http://your-bucket-name.s3.amazonaws.com/guerillagrafters/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = 'http://your-bucket-name.s3.amazonaws.com/guerillagrafters/media/'
 
 #GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
 #GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'

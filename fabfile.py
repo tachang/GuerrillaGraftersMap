@@ -149,7 +149,7 @@ def deploy():
     Does not perform the functions of load_new_data().
     """
     require('settings', provided_by=[production, staging])
-    require('branch', provided_by=[stable, master, branch])
+    require('branch', provided_by=[master, branch])
             
     checkout_latest()
     gzip_assets()
