@@ -21,7 +21,7 @@ MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
 STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
 
-Database (uncomment for staging)
+# Database (uncomment for staging)
 DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
 DATABASE_NAME = 'guerillagrafters'
 DATABASE_USER = 'guerillagrafters'
