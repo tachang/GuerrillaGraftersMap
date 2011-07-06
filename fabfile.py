@@ -9,7 +9,7 @@ Base configuration
 env.project_name = 'guerillagrafters'
 env.database_password = '5IQZe7WEix'
 env.site_media_prefix = "site_media"
-env.admin_media_prefix = "admin_media"
+env.admin_media_prefix = "admin_media/media"
 env.path = '/home/newsapps/sites/%(project_name)s' % env
 env.log_path = '/home/newsapps/logs/%(project_name)s' % env
 env.env_path = '%(path)s/env' % env
