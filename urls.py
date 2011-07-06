@@ -1,10 +1,12 @@
 from django.conf.urls.defaults import *
 from django.contrib.gis import admin
+from django.conf import settings
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	(r'^admin/', include(admin.site.urls)),
+	#(r'^admin/', include(admin.site.urls)),
+	(r'^admin/(.*)', admin.site.root),
 	(r'^explore', 'sanfran.views.explore'),	
 	(r'^explore/$', 'sanfran.views.explore'),
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {

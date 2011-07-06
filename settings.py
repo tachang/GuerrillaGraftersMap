@@ -26,7 +26,7 @@ MEDIA_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagraf
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/admin_media/'
+ADMIN_MEDIA_PREFIX = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/admin_media/media/'
 
 #GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
 #GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
