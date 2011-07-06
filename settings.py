@@ -21,21 +21,21 @@ MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
 STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
 
-# Database (uncomment for staging)
-# DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-# DATABASE_NAME = 'guerillagrafters'
-# DATABASE_USER = 'guerillagrafters'
-# DATABASE_HOST = 'localhost'
-# DATABASE_PASSWORD = '5IQZe7WEix'
-# DATABASE_PORT = '5432'
+Database (uncomment for staging)
+DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
+DATABASE_NAME = 'guerillagrafters'
+DATABASE_USER = 'guerillagrafters'
+DATABASE_HOST = 'localhost'
+DATABASE_PASSWORD = '5IQZe7WEix'
+DATABASE_PORT = '5432'
 
 # temporary local development options (comment for staging)
-DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-DATABASE_NAME = 'ggdb'
-DATABASE_USER = 'postgres'
-GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
-STATIC_ROOT = ''
+# DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
+# DATABASE_NAME = 'ggdb'
+# DATABASE_USER = 'postgres'
+# GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
+# GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+# STATIC_ROOT = ''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
