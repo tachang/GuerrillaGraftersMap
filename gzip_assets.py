@@ -16,7 +16,7 @@ project_dir = 'sanfran'
 
 # ~/sites/guerillagrafters/env/lib/python2.6/site-packages/django/contrib/admin/media
 shutil.rmtree(os.path.join(project_dir, 'gzip'), ignore_errors=True)
-shutil.copytree('~/sites/guerillagrafters/env/lib/python2.6/site-packages/django/contrib/admin/media', os.path.join(project_dir, 'gzip/assets'))
+shutil.copytree('/home/newsapps/sites/guerillagrafters/env/lib/python2.6/site-packages/django/contrib/admin/media/', os.path.join(project_dir, 'gzip/assets'))
 
 for path, dirs, files in os.walk(os.path.join(project_dir, 'gzip/assets')):
     for filename in files:
