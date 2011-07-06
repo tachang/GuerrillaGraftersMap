@@ -5,8 +5,8 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	#(r'^admin/', include(admin.site.urls)),
-	(r'^admin/(.*)', admin.site.root),
+	(r'^admin/', include(admin.site.urls)),
+	#(r'^admin/(.*)', admin.site.root),
 	(r'^explore', 'sanfran.views.explore'),	
 	(r'^explore/$', 'sanfran.views.explore'),
     # Example:
