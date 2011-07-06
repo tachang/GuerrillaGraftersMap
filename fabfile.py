@@ -153,8 +153,8 @@ def deploy():
             
     checkout_latest()
     gzip_assets()
-    #deploy_to_s3()
-    #maintenance_down()
+    deploy_to_s3()
+    maintenance_down()
 
 def gzip_assets():
     """
@@ -162,6 +162,13 @@ def gzip_assets():
     in the gzip directory with the same filename.
     """
     run('cd %(repo_path)s; python gzip_assets.py' % env)
+
+def deploy_to_s3():
+    """
+    Deploy the latest project site media to S3.
+    """
+    env.gzip_path = '%(path)s/repository/%(project_name)s/gzip/assets/' % env
+    run(('s3cmd -P --add-header=Content-encoding:gzip --guess-mime-type --rexclude-from=%(path)s/repository/s3exclude sync %(gzip_path)s s3://%(s3_bucket)s/%(project_name)s/%(admin_media_prefix)s/') % env)
 
 def reboot(): 
     """
