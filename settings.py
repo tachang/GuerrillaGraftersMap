@@ -21,13 +21,19 @@ SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__f
 # Predefined domain
 MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
 
-GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+#GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
+#GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
 
 # Database
+# DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
+# DATABASE_NAME = 'ggdb'
+# DATABASE_USER = 'postgres'
 DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-DATABASE_NAME = 'ggdb'
-DATABASE_USER = 'postgres'
+DATABASE_NAME = 'guerillagrafters'
+DATABASE_USER = 'guerillagrafters'
+DATABASE_HOST = 'localhost'
+DATABASE_PASSWORD = '5IQZe7WEix'
+DATABASE_PORT = '5432'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
