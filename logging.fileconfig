@@ -1,0 +1,36 @@
+# Logging configuration
+
+[loggers]
+keys = root, django, sanfran
+
+[handlers]
+keys = filehandler
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = DEBUG
+handlers = filehandler
+
+[logger_sanfran]
+level = DEBUG
+handlers =
+qualname = sanfran
+propagate = 1
+
+[logger_django]
+level = DEBUG
+handlers =
+qualname = django.db
+propagate = 0
+
+[handler_filehandler]
+class = handlers.TimedRotatingFileHandler
+args = ('/home/newsapps/sites/guerillagrafters/logs/sanfran.log', 'D', 1, 14)
+level = DEBUG
+formatter = generic
+
+[formatter_generic]
+format = [%(asctime)s][%(levelname)s][%(name)s][%(funcName)s] - %(message)s
+#datefmt = %m/%d/%y %I:%M%p

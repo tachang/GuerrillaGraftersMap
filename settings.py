@@ -1,5 +1,7 @@
 import os
 import django
+import logging.config
+
 
 # Django settings for GiraffeGraftersMap project.
 
@@ -15,8 +17,13 @@ MANAGERS = ADMINS
 # Base paths
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+# Import the logging configuration from file
+logging.config.fileConfig('/home/newsapps/sites/guerillagrafters/repository/logging.fileconfig')
+
 # Predefined domain
 MY_SITE_DOMAIN = 'ec2-50-16-132-231.compute-1.amazonaws.com'
+
 # Static file hosting paths
 STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
@@ -87,6 +94,16 @@ TEMPLATE_DIRS = (
 
 ROOT_URLCONF = 'urls'
 
+STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder")
+
+# Django Compressor
+COMPRESS_ROOT = os.path.join(os.path.dirname(__file__), 'public')
+COMPRESS_ENABLED = True
+COMPRESS_URL = "/public/"
+COMPRESS_PARSER = "compressor.parser.BeautifulSoupParser"
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -95,8 +112,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
 	'django.contrib.gis',
-	'staticfiles',
+#	'staticfiles',
 	'sanfran',
+    'compressor',
 	# Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+

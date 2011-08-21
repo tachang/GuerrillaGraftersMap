@@ -13,5 +13,3 @@ class PlanningNeighborhoods(models.Model):
     
     def __unicode__(self):
 		return self.neighborho
-
-
