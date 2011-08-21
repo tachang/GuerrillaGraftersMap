@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 # Predefined domain
-MY_SITE_DOMAIN = 'ec2-184-73-1-9.compute-1.amazonaws.com'
+MY_SITE_DOMAIN = 'ec2-50-16-132-231.compute-1.amazonaws.com'
 # Static file hosting paths
 STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
