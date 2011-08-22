@@ -12,7 +12,7 @@ body{height:100%; font-family: "Arial"}
 
 .upper_banner{border-right: 1px solid #000000;border-left: 1px solid #000000;height:59px;width:1023px;background-color:#fff;}
 
-.black_tree{background:url(../media/black_tree.jpg) no-repeat;width:60px; height:60px;margin:0 10px 0 10px;float:left;}
+.black_tree{background:url(../media/black_tree.jpg) no-repeat;width:50px; height:50px;margin:0 10px 0 10px;float:left;}
 
 .green_tree{background:url(../media/green_tree.jpg) no-repeat;width:71px; height:50px;margin:0 10px 0 0;float:left;}
 
