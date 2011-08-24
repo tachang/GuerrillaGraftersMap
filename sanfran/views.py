@@ -17,3 +17,8 @@ def explore(request):
     })
 
     return HttpResponse(t.render(c))
+
+def about(request):
+    t = loader.get_template('sanfran/about.html')
+    c = Context()
+    return HttpResponse(t.render(c))
