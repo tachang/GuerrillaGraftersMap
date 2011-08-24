@@ -1,48 +1,11 @@
-{% load compress %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<html>
 <head>
-	<title>guerilla grafters!</title>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	
-	<link rel="stylesheet" href="http://openlayers.org/dev/theme/default/style.css" type="text/css"> 
-    <link rel="stylesheet" href="http://openlayers.org/dev/examples/style.css" type="text/css">
-	<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">
-
-	<style type="text/css">
-		.bigmap {
-		    width: 831px;
-		    height: 525px;
-		    border: 1px solid #ccc;
-		}	
-        #controlToggle li {
-            list-style: none;
-        }
-    </style>    
-
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script src="http://openlayers.org/dev/lib/Firebug/firebug.js"></script>
-	<script type="text/javascript" src="http://openlayers.org/api/2.8/OpenLayers.js"></script>
-	<script type="text/javascript" src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-
-	<script type="text/javascript">
-	    neighborhoodFeatures = [];
-	    {% for neighborhood in neighborhoods %}
-    
-		var feature = new OpenLayers.Feature.Vector(
-		    OpenLayers.Geometry.fromWKT('{{ neighborhood.geom.wkt }}')
-		);
-	    neighborhoodFeatures.push(feature);
-		{% endfor %}
-    </script>
-
-    <script type="text/javascript" src="/public/js/mapping.js"></script>
-
+<title>guerilla grafters!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">
+<!-- End ImageReady Styles -->
 </head>
-
 <body class="bg">
 	<div class="login"><div class="upper_right_wrap"><a href="">login</a>. <a href="">sign-up</a>.</div></div>
 	<div class="upper_banner">
@@ -54,10 +17,17 @@
 		<input id="neighborhood_input" value="neighborhood" />
 		<input id="search" value="search" />
 	</div>
-	
-  <div id="map" class="bigmap"></div> 
 
-
+	<div id="map">
+		<img src="/public/media/manifesto_header.jpg" /><br />
+		Guerrilla Grafting is an act of creative constructive rebellion that reclaims the commons for productive use, that benefit all, or at lease the ones that like to eat. Imagine picking fruit off a tree as you walk down the street...
+<br /><br />
+		As guerilla grafters, we identify stewards that agree to care for the street trees in their neighborhood; they propose appropriate trees for grafting - ornamental pears, plums, cherries and so forth. When grafting season comes along, we get scions (cuttings from fruit bearing trees) and go to work.
+<br /><br />
+		As part of the project, we are creating a resource map for tracking the grafted trees and the associated grafts. This serves the dual purpose of facilitating ongoing maintenance and harvest, plus gathering actual data on what might be the best fruit varieties for each neighborhood/micro-climate - expending the repertoire of appropriate fruit trees for urban farmers and home gardeners.
+<br /><br />
+		We really hope that you are interested in the project, and are willing to join us in whatever capacity that you see fit. We understand guerrilla grafting as a valuable project that has far reaching consequences and benefits, for wide areas of diverse groups that don't often seem to understand each others needs and perspectives. We hope to bridge that, not in words but in deeds, and along with it create a physical reality that celebrates abundance instead of scarcity.
+	</div>
 	<div class="right_column">
 		<div id="navcontainer">
 		<ul id="navlist">
@@ -68,7 +38,7 @@
 		</ul>
 		<img src="/public/media/logo_for_right.jpg" width="180" />
 		<ul id="navlist2">
-			<li id="active"><a href="/about/" id="current">about us</a></li>
+			<li id="active"><a href="#" id="current">about us</a></li>
 		</ul>
 		</div>
 	</div>
@@ -121,7 +91,5 @@
 		</ul>
 	</div>
 
-
 </body>
-
 </html>
