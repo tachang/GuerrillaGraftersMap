@@ -23,9 +23,9 @@ body{height:100%; font-family: "Arial"}
 #neighborhood_input{margin: 33px 10px 0 0px;}
 #search{margin: 33px 10px 0 0px;}
 
-.right_column{height:100%;float:left;background:#fff;width: 180px;height:525px;border-top:5px solid #000;border-right:5px solid #000;border-bottom:5px solid #000;}
+.right_column{}
 
-#navcontainer { width: 200px; }
+#navcontainer {height:100%;float:left;background:#fff;width: 180px;height:525px;border-top:5px solid #000;border-right:5px solid #000;border-bottom:5px solid #000; }
 
 #navcontainer ul
 {
@@ -37,6 +37,7 @@ body{height:100%; font-family: "Arial"}
 
 #navcontainer a
 {
+	color:#fff;
 	display: block;
 	padding: 10px 0 0 20px;
 	width: 160px;
@@ -45,7 +46,7 @@ body{height:100%; font-family: "Arial"}
 	margin: 15px 0 0px 0;
 }
 
-#navcontainer a:link, #navlist a:visited
+#navcontainer a:link, #navlist a:visited, #navlist2 a:visited
 {
 	color: #fff;
 	text-decoration: none;
@@ -81,8 +82,9 @@ body{height:100%; font-family: "Arial"}
 }
 .image_feed{height:75px;width:1023px;//border:1px solid black;clear:float;}
 #dock {
-	margin:0; padding:0;
+	margin:533px 0 0 0; padding:0;
 	width:1023px;
+	height:90px;
 	list-style:none;
 	position:relative;
 	//text-align:center;
