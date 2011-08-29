@@ -1,10 +1,13 @@
 pip-log.txt
-*.pyc
 sanfran/.Python
 sanfran/bin/
 sanfran/include/
 sanfran/lib/python2.7/
 sanfran/src/
 public/CACHE/
-
-
+/bin
+.Python
+include/
+lib/
+.gitignore
+*.pyc
