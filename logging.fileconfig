@@ -27,7 +27,7 @@ propagate = 0
 
 [handler_filehandler]
 class = handlers.TimedRotatingFileHandler
-args = ('/home/newsapps/sites/guerillagrafters/logs/sanfran.log', 'D', 1, 14)
+args = ('logs/sanfran.log', 'D', 1, 14)
 level = DEBUG
 formatter = generic
 
