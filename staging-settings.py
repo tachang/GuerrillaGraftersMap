@@ -28,13 +28,16 @@ MY_SITE_DOMAIN = 'ec2-50-16-132-231.compute-1.amazonaws.com'
 STATIC_URL = 'http://rebounds-dev.s3-website-us-east-1.amazonaws.com/guerillagrafters/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "admin_media/media/"
 
-# Database (uncomment for staging)
-DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-DATABASE_NAME = 'guerrilla_grafters_staging'
-DATABASE_USER = 'guerrilla_grafters_staging'
-DATABASE_HOST = 'localhost'
-DATABASE_PASSWORD = 'password'
-DATABASE_PORT = '5432'
+DATABASES = {
+  'default': {
+     'ENGINE': 'django.contrib.gis.db.backends.postgis',
+     'NAME': 'guerrilla_grafters_staging',
+     'USER': 'guerrilla_grafters_staging',
+     'PASSWORD': 'password',
+     'HOST': 'localhost',
+     'PORT': '5432',
+  }
+}
 
 # temporary local development options (comment for staging)
 # DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
