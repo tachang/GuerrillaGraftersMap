@@ -60,7 +60,7 @@ body{height:100%; font-family: "Arial"}
 
 #navlist2{margin:-20px 0 0 0;}
 
-#map {
+#map, #about {
 	clear:left;
 	//position:absolute;
 	left:0px;
