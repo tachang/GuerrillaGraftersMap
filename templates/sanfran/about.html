@@ -1,22 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>guerilla grafters!</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">
-<!-- End ImageReady Styles -->
-</head>
-<body class="bg">
-	<div class="login"><div class="upper_right_wrap"><a href="">login</a>. <a href="">sign-up</a>.</div></div>
-	<div class="upper_banner">
-		<a href="/"><div class="title"></div></a>
-		<a href=""><div class="black_tree"></div></a>
-		<a href=""><div class="green_tree"></div></a>
-		<a href=""><div class="pink_tree"></div></a>
-		<input id="tree_input" value="tree" />
-		<input id="neighborhood_input" value="neighborhood" />
-		<input id="search" value="search" />
-	</div>
+{% extends "base.html" %}
+{% load compress %}
+
+{% block content %}
 
 	<div id="map">
 		<img src="/public/media/manifesto_header.jpg" /><br />
@@ -28,68 +13,4 @@
 <br /><br />
 		We really hope that you are interested in the project, and are willing to join us in whatever capacity that you see fit. We understand guerrilla grafting as a valuable project that has far reaching consequences and benefits, for wide areas of diverse groups that don't often seem to understand each others needs and perspectives. We hope to bridge that, not in words but in deeds, and along with it create a physical reality that celebrates abundance instead of scarcity.
 	</div>
-	<div class="right_column">
-		<div id="navcontainer">
-		<ul id="navlist">
-			<li><a href="#">add tree</a></li>
-			<li><a href="#">add graft</a></li>
-			<li><a href="#">add photo</a></li>
-			<li><a href="#">find your branch</a></li>
-		</ul>
-		<img src="/public/media/logo_for_right.jpg" width="180" />
-		<ul id="navlist2">
-			<li id="active"><a href="#" id="current">about us</a></li>
-		</ul>
-		</div>
-	</div>
-	<div class="image_feed">
-		<ul id="dock">
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft1.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft2.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-					<img src="/public/media/graft1.jpg" width="75" alt="" /></a>
-					<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft2.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft1.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft2.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft1.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft2.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft1.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft2.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-			<li><a href="" rel="bookmark" title="">
-				<img src="/public/media/graft1.jpg" width="75" alt="" /></a>
-				<span></span>
-			</li>
-		</ul>
-	</div>
-
-</body>
-</html>
+{% endblock %}

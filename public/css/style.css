@@ -5,19 +5,19 @@ body{height:100%; font-family: "Arial"}
 	background-color:#FFFFFF; background-repeat:no-repeat;padding:0 0 0 40px;
 }
 
-.login{border-right: 1px solid #000000;border-left: 1px solid #000000;height:15px;width:1023px;background-color:#fff;position:relative;}
-.upper_right_wrap{color:#EC008C; font-size:12px;position:absolute;top:3px;right:3px;}
-.upper_right_wrap a{color:#EC008C;margin-left:20px;text-decoration:none;}
+.login{margin:2px 0 0 0;background-color:#EC008C;border-right: 1px solid #000000;border-left: 1px solid #000000;height:30px;width:1023px;position:relative;}
+.upper_right_wrap{color:#fff; font-size:12px;position:absolute;top:3px;right:3px;}
+.upper_right_wrap a{color:#fff;margin-left:10px;text-decoration:none;}
 .upper_right_wrap a:hover{text-decoration:underline;}
 
-.upper_banner{border-right: 1px solid #000000;border-left: 1px solid #000000;height:59px;width:1023px;background-color:#fff;}
+.upper_banner{xmargin:15px 0 0 0;border-right: 1px solid #000000;border-left: 1px solid #000000;height:59px;width:1023px;background-color:#fff;clear:left;}
 
-.title{background:url(../media/title.jpg) no-repeat;width:250px; height:50px;margin:0 10px 0 10px;float:left;}
-.black_tree{background:url(../media/black_tree.jpg) no-repeat;width:50px; height:50px;margin:0 10px 0 10px;float:left;}
+.title{background:url(../media/title.png) no-repeat;width:200px; height:29px;margin:0 10px 0 10px;float:left;}
+.black_tree{background:url(../media/black_tree.jpg) no-repeat;width:50px; height:50px;margin:5px 10px 0 10px;float:left;}
 
-.green_tree{background:url(../media/green_tree.jpg) no-repeat;width:71px; height:50px;margin:0 10px 0 0;float:left;}
+.green_tree{background:url(../media/green_tree.jpg) no-repeat;width:71px; height:50px;margin:5px 10px 0 0;float:left;}
 
-.pink_tree{background:url(../media/pink_tree.jpg) no-repeat;width:63px; height:50px;margin:0 10px 0 0;float:left;}
+.pink_tree{background:url(../media/pink_tree.jpg) no-repeat;width:63px; height:50px;margin:5px 10px 0 0;float:left;}
 
 #tree_input{margin: 33px 10px 0 0px;}
 #neighborhood_input{margin: 33px 10px 0 0px;}
@@ -112,4 +112,286 @@ body{height:100%; font-family: "Arial"}
 	//text-transform:uppercase;
 	font: 1.17em Verdana, Helvetica, sans-serif; color:#0C1A0F;
 	letter-spacing:2px;
+}
+
+/*search box*/
+
+#searchBox{
+	xbackground: url(/static/images/v2/bg_search.gif) repeat-x top left;
+	width:600px;
+	height:115px;
+	float: left;
+	margin-bottom:0;
+}
+#searchBoxContainer {
+	width:600px;
+	margin:0 auto;
+	position: relative;
+}
+ul#searchTitles {
+	display: inline;
+	margin-top:18px;
+	margin-bottom:0;
+	padding-bottom:0;
+}
+ul#searchTitles li#searchSpecies {
+	float:left;
+	width:300px;
+	list-style-type: none;
+	margin-right:0;
+	padding-right:0;
+}
+ul#searchTitles li#searchLocation {
+	float:left;
+	width:120px;
+	list-style-type: none;
+	margin-left:60px;
+	padding-left:0;
+}
+ul#searchBoxes {
+	float:left;
+	width:600px;
+	display: inline;
+	margin:0 0 10px 0;
+	padding:0;
+}
+ul#searchBoxes li#searchSpeciesBox {
+	float:left;
+	width:250px;
+	list-style-type: none;
+}
+#searchLocationBrowse, #searchSpeciesBrowse {
+	height:24px;
+	width:30px;
+	background: #EC008C;
+	border:2px solid #4D4D4D;
+	text-align:center;
+	line-height:24px;
+	color:#fff;
+	font-size:14px;
+	font-weight:bold;
+	cursor: pointer;
+	padding: 0 5px;
+    margin-top:2px;
+	float: left;
+}
+#searchLocationBrowse:hover, #searchSpeciesBrowse:hover {
+	background: #4D4D4D;
+}
+ul#searchBoxes li#searchSpeciesBox input#species_search_input {
+	width:150px;
+	height:16px;
+	padding:5px;
+	margin:0;
+	font-size:15px;
+	color:#afafaf;
+}
+ul#searchBoxes li#searchSpeciesBox input#species_search_input2 {
+	width:150px;
+	height:16px;
+	padding:5px;
+	margin:0;
+	font-size:15px;
+	color:#afafaf;
+}
+ul#searchBoxes  li#searchJoiner {
+	float:left;
+	width:60px;
+	list-style-type: none;
+	font-size:20px;
+	color:#4e6205;
+	font-weight:bold;
+	text-align:center;
+	padding-top:3px;
+}
+ul#searchBoxes  li#searchLocationBox {
+	float:left;
+	width:340px;
+	list-style-type: none;
+}
+ul#searchBoxes li#searchLocationBox input#location_search_input {
+	width:150px;
+	height:16px;
+	padding:5px;
+	margin:0;
+	font-size:15px;
+	color:#afafaf;
+}
+ul#searchBoxes li#searchSpeciesBox input#location_search_input {
+	width:150px;
+	padding:10px;
+	font-size:15px;
+	color:#afafaf;
+}
+ul#searchBoxes  li#searchButton {
+	float:right;
+	width:100px;
+	list-style-type: none;
+	//text-align:right;
+}
+ul#searchBoxes li#searchButton .go {
+	height:30px;
+	background: #EC008C;
+	xborder:2px solid #EC008C;
+	text-align:center;
+	line-height:24px;
+	color:#fff;
+	font-size:17px;
+	font-weight:bold;
+	cursor: pointer;
+	padding-bottom:3px;
+	padding-right:5px;
+	padding-left:5px;
+	vertical-align: middle;
+}
+ul#searchBoxes li#searchButton .go:hover {
+	background:#e08a00;
+}
+ul#searchSuggest {
+	clear:both;
+	display: inline;
+	color:#666;
+}
+ul#searchSuggest li#searchSpeciesSuggest {
+	float:left;
+	width:150px;
+	list-style-type: none;
+	text-align:left;
+	margin-right:0;
+	padding-right:0;
+}
+ul#searchSuggest li#searchLocationSuggest {
+	float:left;
+	width:150px;
+	list-style-type: none;
+	margin-left:60px;
+	padding-left:0;
+}
+ul#searchSuggest li#searchFilter {
+	float:right;
+	width:150px;
+	list-style-type: none;
+	text-align:right;
+}
+ul#searchSuggest li#searchFilter a#advanced em span {
+    font-style: normal;
+    padding-right:5px;
+}
+ul#searchSuggest li#searchFilter a#advanced #arrow {
+    vertical-align:center;
+}
+
+/* DROP-DOWN RESULTS LISTS */
+#searchBox .ac_results {
+	background: #E7EDDF; 
+	border: #BFD769 1px solid;
+	display:none;
+	position:absolute;
+	width:150px;
+	top:75px;
+	padding: 0 15px 15px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+
+#searchBox .ac_results li.header {
+	font-weight:bold;
+}
+#searchBox .ac_results li.ac-even {
+	background: #FFF;
+	padding-left:10px;
+}
+#searchBox .ac_results li.ac_odd {
+	background: #F4F7E3;
+	padding-left:10px;
+}
+#searchBox .ac_results li.ac_over {
+	background: #717A3B;
+	cursor: pointer;
+}
+#searchBox .ac_results#searchNBList {
+	left: 405px; 
+	z-index: 10
+}
+#searchBox .ac_results#searchSpeciesList {
+	left: 0;
+	z-index: 11;
+}
+#searchBox .ac_results  ul {
+	background: #fff;
+	display:block;
+	border: 1px solid #c7c7c7;
+}
+#searchBox .ac_results a {
+	margin: 7px 0 0 0;
+}
+#searchBox .ac_results  h2 {
+	color: #4E621A;
+	font-size: 12px;
+	margin: 7px 0 9px 0;
+	float:left;
+}
+
+.search-box{
+	xbackground: url(/static/images/v2/bg_search.gif) repeat-x top left;
+	width:600px;
+	height:115px;
+	
+}
+.search-box .holder{
+	width:600px;
+	margin:0 auto;
+	overflow:hidden;
+	padding:14px 0;
+	xbackground: url(/static/images/es/separator02.gif) no-repeat 480px 5px;
+}
+.search-box .holder .frame{
+	width:60000px;
+	overflow:hidden;
+}
+.search-box .address,
+.search-box .address fieldset{float:left;}
+.search-box .address{margin-right:42px;}
+.address label,
+.address input{float:left;}
+.address input{
+	font-size:10px;
+	color:#999;
+	border:1px solid #ccc;
+	width:150px;
+	padding:6px 9px;
+	margin-right:6px;
+}
+.address label{
+	font-size:14px;
+	color:#000;
+	margin-right:7px;
+	padding-top:6px;
+}
+.address .examples{
+	color:#666;
+	font-size:10px;
+	display:block;
+	margin-left:142px;
+	clear:left;
+}
+.address .btn{
+	backgroundx: url(/static/images/es/bg-btn.gif) no-repeat;
+	width: 48px;
+	height: 21px;
+	color:#fff;
+	font-size:11px;
+	text-align:center;
+	border:0;
+	padding:3px 4px;
+	margin:5px 0 0;
+	cursor:pointer; 
+}
+.search-box .explore label{
+	width:160px;
+	text-align:right;
+}
+.explore .examples{
+	margin-left:170px !important;
 }
