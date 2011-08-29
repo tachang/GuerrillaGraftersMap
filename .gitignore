@@ -9,5 +9,5 @@ public/CACHE/
 .Python
 include/
 lib/
-.gitignore
 *.pyc
+logs/
