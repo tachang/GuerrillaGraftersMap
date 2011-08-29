@@ -16,10 +16,10 @@ MANAGERS = ADMINS
 
 # Base paths
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
-SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 # Import the logging configuration from file
-logging.config.fileConfig('/home/newsapps/sites/guerillagrafters/repository/logging.fileconfig')
+logging.config.fileConfig(os.path.join(SITE_ROOT, 'logging.fileconfig'))
 
 # Predefined domain
 MY_SITE_DOMAIN = 'ec2-50-16-132-231.compute-1.amazonaws.com'
