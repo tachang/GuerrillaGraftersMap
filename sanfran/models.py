@@ -7,9 +7,19 @@ class PlanningNeighborhoods(models.Model):
     geom = models.MultiPolygonField(srid=4326)
     objects = models.GeoManager()
 
-
     class Meta:
 		verbose_name_plural = "Planning Neighborhoods"
-    
+
     def __unicode__(self):
-		return self.neighborho
+	    return self.neighborho
+
+class Trees(models.Model):
+	common_name = models.CharField(max_length=50)
+	geom = models.PointField(srid=3857)
+	objects = models.GeoManager()
+	
+	class Meta:
+		verbose_name_plural = "Trees"
+	
+	def __unicode__(self):
+		return self.common_name

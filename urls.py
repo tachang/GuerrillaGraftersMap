@@ -7,8 +7,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^public/(?P<path>.*)$', 'django.views.static.serve',
       {'document_root': settings.STATIC_ROOT }),
-
-
     (r'^admin/', include(admin.site.urls)),
     (r'^explore/$', 'sanfran.views.explore'),
     (r'^about/$', 'sanfran.views.about'),
