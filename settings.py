@@ -112,7 +112,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
 	'django.contrib.gis',
-#	'staticfiles',
 	'sanfran',
     'compressor',
 	# Uncomment the next line to enable admin documentation:

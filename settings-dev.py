@@ -1,27 +1,8 @@
 import os
 import django
+import logging.config
 
 # Django settings for GiraffeGraftersMap project.
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'ggdb',
-        'USER': 'postgres',                     
-    }
-}
-
-GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -46,6 +27,47 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '6f@dyoq0&1ehftrrhl2p%vi!d)t@l3rp9yiso7u8m6g3(z1dqt'
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'ggdb',
+        'USER': 'developer',                     
+    }
+}
+
+# Base paths
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+
+STATIC_ROOT = (
+	os.path.join(SITE_ROOT, 'public')
+)
+
+ROOT_URLCONF = 'urls'
+
+# Django Compressor
+COMPRESS_ROOT = os.path.join(os.path.dirname(__file__), 'public')
+COMPRESS_ENABLED = True
+COMPRESS_URL = "/public/"
+COMPRESS_PARSER = "compressor.parser.BeautifulSoupParser"
+
+# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
+# trailing slash.
+# Examples: "http://foo.com/media/", "/media/".
+ADMIN_MEDIA_PREFIX = '/media/'
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = ''
@@ -54,14 +76,6 @@ MEDIA_ROOT = ''
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = ''
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '6f@dyoq0&1ehftrrhl2p%vi!d)t@l3rp9yiso7u8m6g3(z1dqt'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -85,8 +99,6 @@ TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
-ROOT_URLCONF = 'urls'
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,4 +110,5 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 	'sanfran',
+	'compressor'
 )
