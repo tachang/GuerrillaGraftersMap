@@ -16,25 +16,25 @@
 	<input id="new_tree_lat" type="text" name="lat" value="37.77003627110172" />
 	<input id="new_tree_lon" type="text" name="lon" value="-122.45000839233397"/>
 </div>
-<input type="submit" value="Add Tree!" />
+<input id="new_tree_button" type="submit" value="Add Tree!" />
 </form>
 
 <script>
 		
 	var map = new L.Map('add_map');
 	
-	var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/6200c872007d4cbbaab22fddf75c7a03/997/256/{z}/{x}/{y}.png',
-				cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+	var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/6200c872007d4cbbaab22fddf75c7a03/45473/256/{z}/{x}/{y}.png',
+				cloudmadeAttribution = 'Map data CCBYSA 2011 OpenStreetMap.org contributors',
 				cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
 			
 	map.setView(new L.LatLng(37.77,-122.45), 13).addLayer(cloudmade);
 	
 	var MarkerIcon = L.Icon.extend({
-	    iconUrl: '/public/leaflet/images/marker.png',
-	    shadowUrl: '/public/leaflet/images/marker-shadow.png',
-	    iconSize: new L.Point(25, 41),
-	    shadowSize: new L.Point(41, 41),
-	    iconAnchor: new L.Point(12, 41),
+	    iconUrl: '/public/leaflet/images/leaf-green.png',
+	    shadowUrl: '/public/leaflet/images/leaf-shadow.png',
+	    iconSize: new L.Point(38, 95),
+	    shadowSize: new L.Point(68, 95),
+	    iconAnchor: new L.Point(21, 95),
 	    popupAnchor: new L.Point(-3, -76)
 	});
 	
@@ -49,7 +49,7 @@
 	});
 	
 	{% for point in points %}		
-		circleMarker = new L.Circle(new L.LatLng({{ point.y }}, {{ point.x }}), 10 );
+		circleMarker = new L.Circle(new L.LatLng({{ point.y }}, {{ point.x }}), 15, {color: '#339900', opacity: 0.9} );
 		map.addLayer(circleMarker);		
 	{% endfor %}
 

@@ -4,10 +4,12 @@
 <head>
 	<title>guerilla grafters!</title>	
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />	
+	
 	<!-- ggrafters css -->
 	<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">	
-	<!-- start leaflet -->
-	<link rel="stylesheet" href="/public/leaflet/leaflet.css" />
+	
+	<!-- start leaflet (map css & js ref) -->
+	<link rel="stylesheet" href="/public/leaflet/leaflet.css" />	
 	<!--[if lte IE 8]><link rel="stylesheet" href="public/leaflet/leaflet.ie.css" /><![endif]-->
 	<script src="/public/leaflet/leaflet.js"></script>
 	<!-- end leaflet -->  
@@ -23,9 +25,20 @@
 			font-size: 36px; 
 			border: none;
 		}
+		#new_tree_button {
+			background-color:#FF3399;
+			color:#FFF;
+			margin-top: 20px;
+			padding: 5px;
+			font-size: 24px; 
+			border: 1px solid #000;
+		}
+		#new_tree_button:hover {
+			cursor: pointer;
+		}		
 		.upper_banner_MOD{xmargin:15px 0 0 0;height:59px;width:1023px;background-color:#fff;clear:left;}
 		.bg_MOD {
-			background-color:#FFFFFF; background-repeat:no-repeat;padding:0 0 0 120px;
+			background-color:#FFFFFF; background-repeat:no-repeat;margin-left:auto;margin-right:auto;width:80%;margin-top:2px;
 		}
 	</style>
 	<!-- end temporary css from dev, should be replaced by designers! -->
