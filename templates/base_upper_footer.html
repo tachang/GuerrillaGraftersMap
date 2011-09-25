@@ -1,60 +1,38 @@
+<!DOCTYPE html>
 {% load compress %}
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <html>
 <head>
 	<title>guerilla grafters!</title>	
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />	
 	<!-- ggrafters css -->
-	<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">
-	<!-- temporary css from dev, should be replaced by designers! -->
-	<style type="text/css">
-		.bigmap {
-		    width: 831px;
-		    height: 525px;
-		    border: 1px solid #ccc;
-		}	
-        #controlToggle li {
-            list-style: none;
-        }
-    </style>
-	<!-- end temporary css from dev, should be replaced by designers! -->
-	
+	<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">	
 	<!-- start leaflet -->
 	<link rel="stylesheet" href="/public/leaflet/leaflet.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="public/leaflet/leaflet.ie.css" /><![endif]-->
 	<script src="/public/leaflet/leaflet.js"></script>
-	<!-- end leaflet -->
-
-	<!-- start openlayers -->
-	<link rel="stylesheet" href="http://openlayers.org/dev/theme/default/style.css" type="text/css"> 
-    <link rel="stylesheet" href="http://openlayers.org/dev/examples/style.css" type="text/css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script src="http://openlayers.org/dev/lib/Firebug/firebug.js"></script>
-	<script type="text/javascript" src="http://openlayers.org/api/2.8/OpenLayers.js"></script>
-	<script type="text/javascript" src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-	<script type="text/javascript" src="/public/js/mapping.js"></script>
-	<!-- end openlayers -->
-
-	<!-- testing script to check data from geodjango, can be removed in the future leaving for now as reference -->
-	<script type="text/javascript">
-	    neighborhoodFeatures = [];
-	    {% for neighborhood in neighborhoods %}
-    
-		var feature = new OpenLayers.Feature.Vector(
-		    OpenLayers.Geometry.fromWKT('{{ neighborhood.geom.wkt }}')
-		);
-	    neighborhoodFeatures.push(feature);
-		{% endfor %}
-    </script>    
-
+	<!-- end leaflet -->  
+	
+	<!-- temporary css from dev, should be replaced by designers! -->
+	<style type="text/css">
+		#latlng_display {
+			font-size:36px;
+			width: 400px;
+		}
+		#latlng_display input {
+			background-color:#F8F8F8;
+			font-size: 36px; 
+			border: none;
+		}
+		.upper_banner_MOD{xmargin:15px 0 0 0;height:59px;width:1023px;background-color:#fff;clear:left;}
+		.bg_MOD {
+			background-color:#FFFFFF; background-repeat:no-repeat;padding:0 0 0 120px;
+		}
+	</style>
+	<!-- end temporary css from dev, should be replaced by designers! -->
 </head>
-
-<body class="bg">
+<body class="bg_MOD">
 		<div class="login">	<a href="index.html"><div class="title"></div></a> <div class="upper_right_wrap"><a href="">login</a>. <a href="">sign-up</a>.</div></div>
-	<div class="upper_banner">
+	<div class="upper_banner_MOD">
 		<a href="/"><div class="title"></div></a>
 		<a href=""><div class="black_tree"></div></a>
 		<a href=""><div class="green_tree"></div></a>
@@ -63,26 +41,11 @@
 		<input id="neighborhood_input" value="neighborhood" />
 		<input id="search" value="search" />
 	</div>
-
 	<!-- map / about or other specific content goes here -->
 	<div id="content">
 	    {% block content %}
 		{% endblock %}
 	</div>
-	
-	<div id="navcontainer">
-	<ul id="navlist">
-		<li><a href="#">add tree</a></li>
-		<li><a href="#">add graft</a></li>
-		<li><a href="#">add photo</a></li>
-		<li><a href="#">find your branch</a></li>
-	</ul>
-	<img src="/public/media/logo_for_right.jpg" width="180" />
-	<ul id="navlist2">
-		<li id="active"><a href="/about/" id="current">about us</a></li>
-	</ul>
-	</div>
-
 	{% block footer %}
 	<div class="image_feed">
 		<ul id="dock">
