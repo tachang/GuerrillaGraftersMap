@@ -39,21 +39,6 @@ DATABASES = {
   }
 }
 
-# temporary local development options (comment for staging)
-# DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-# DATABASE_NAME = 'ggdb'
-# DATABASE_USER = 'postgres'
-# GEOS_LIBRARY_PATH='/usr/local/lib/libgeos_c.dylib'
-# GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
-# STATIC_ROOT = ''
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
@@ -106,10 +91,14 @@ STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
     "compressor.finders.CompressorFinder")
 
 # Django Compressor
-COMPRESS_ROOT = os.path.join(os.path.dirname(__file__), 'public')
 COMPRESS_ENABLED = True
+COMPRESS_MTIME_DELAY = 3
+COMPRESS_ROOT = os.path.join(os.path.dirname(__file__), 'public')
 COMPRESS_URL = "/public/"
 COMPRESS_PARSER = "compressor.parser.BeautifulSoupParser"
+COMPRESS_PRECOMPILERS = (
+  ('text/less', os.path.join(SITE_ROOT, 'less/bin/lessc {infile} {outfile}')),
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -118,11 +107,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.admin',
-	'django.contrib.gis',
-#	'staticfiles',
-	'sanfran',
+    'django.contrib.gis',
+    'sanfran',
     'compressor',
-	# Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
