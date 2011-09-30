@@ -102,11 +102,17 @@ STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "compressor.finders.CompressorFinder")
 
+SASS_INCLUDE = os.path.join(SITE_ROOT, 'public/css/sass')
+
 # Django Compressor
 COMPRESS_ROOT = os.path.join(os.path.dirname(__file__), 'public')
 COMPRESS_ENABLED = True
 COMPRESS_URL = "/public/"
 COMPRESS_PARSER = "compressor.parser.BeautifulSoupParser"
+COMPRESS_PRECOMPILERS = (
+  ('text/x-scss', 'pyscss -I %s --output={outfile} {infile}' % SASS_INCLUDE),
+)
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',

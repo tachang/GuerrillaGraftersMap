@@ -11,9 +11,12 @@
 	<link rel="stylesheet" href="http://openlayers.org/dev/theme/default/style.css" type="text/css"> 
     <link rel="stylesheet" href="http://openlayers.org/dev/examples/style.css" type="text/css">
 
-        {% compress css %}
 	<link href="/public/css/style.css" rel="stylesheet" media="screen" type="text/css">
-        {% endcompress %}
+
+  {% compress css %}
+  <link rel="stylesheet" type="text/x-scss" href="/public/css/styles.scss" charset="utf-8" media="screen" />
+  {% endcompress %}
+
 
 	<style type="text/css">
 		.bigmap {

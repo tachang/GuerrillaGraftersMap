@@ -1,0 +1,9 @@
+@import "compass";
+@import "fancy-buttons";
+@import "standard-mixins";
+@option compress:no;
+
+
+.test {
+  @include border-radius(10px);
+}
