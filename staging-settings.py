@@ -112,5 +112,6 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'sanfran',
     'compressor',
+    'south'
 )
 
