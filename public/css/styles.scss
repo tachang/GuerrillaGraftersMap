@@ -6,4 +6,5 @@
 
 .test {
   @include border-radius(10px);
+  @include box-shadow(red 2px 2px 10px);
 }
